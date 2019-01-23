@@ -40,8 +40,7 @@ public class Pile extends Pane {
     }
 
     public int numOfCards() {
-        //TODO
-        return 1;
+        return this.cards.size();
     }
 
     public boolean isEmpty() {
