@@ -80,7 +80,7 @@ public class Card extends ImageView {
     public static boolean isOppositeColor(Card card1, Card card2) {
         if ((card1.getSuit() == Suit.hearts || card1.getSuit() == Suit.diamonds &&
             card2.getSuit() == Suit.clubs || card2.getSuit() == Suit.spades) &&
-            (card1.getSuit() == Suit.clubs || card2.getSuit() == Suit.spades &&
+            (card1.getSuit() == Suit.clubs || card1.getSuit() == Suit.spades &&
             card2.getSuit() == Suit.hearts || card2.getSuit() == Suit.diamonds)) {
             return true;
         } else
