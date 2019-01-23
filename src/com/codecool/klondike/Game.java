@@ -74,7 +74,7 @@ public class Game extends Pane {
     };
 
     private EventHandler<MouseEvent> onMouseReleasedHandler = e -> {
-        if (draggedCards.isEmpty())
+        if ( draggedCards.isEmpty())
             return;
         Card card = (Card) e.getSource();
         Pile tableauPile = getValidIntersectingPile(card, tableauPiles);
@@ -85,9 +85,9 @@ public class Game extends Pane {
             handleValidMove(card, foundationPile);
         } else {
             draggedCards.forEach(MouseUtil::slideBack);
-            draggedCards = null;
-            // TODO
+            draggedCards = FXCollections.observableArrayList();
         }
+
     };
 
     public boolean isGameWon() {
