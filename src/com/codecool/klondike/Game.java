@@ -186,7 +186,21 @@ public class Game extends Pane {
 
     public void dealCards() {
         Iterator<Card> deckIterator = deck.iterator();
-        //TODO
+        Iterator<Pile> tableauIterator = tableauPiles.iterator();
+        int size = 1;
+        while (tableauIterator.hasNext()) {
+            Pile tableau = tableauIterator.next();
+            for (int i = 0; i < size; ++i ) {
+                Card card = deckIterator.next();
+                deckIterator.remove();
+                tableau.addCard(card);
+                addMouseEventHandlers(card);
+                getChildren().add(card);
+            }
+            tableau.getTopCard().flip();
+            ++size;
+        }
+
         deckIterator.forEachRemaining(card -> {
             stockPile.addCard(card);
             addMouseEventHandlers(card);
