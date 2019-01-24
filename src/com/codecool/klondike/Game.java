@@ -73,8 +73,6 @@ public class Game extends Pane {
             }
         }
 
-//        draggedCards.add(card);
-
         for (Card card1: draggedCards) {
             card1.getDropShadow().setRadius(20);
             card1.getDropShadow().setOffsetX(10);
@@ -134,6 +132,9 @@ public class Game extends Pane {
 
     public boolean isMoveValid(Card card, Pile destPile) {
         if (destPile.getPileType() == Pile.PileType.FOUNDATION) {
+            if(draggedCards.size()!=1){
+                return false;
+            }
             if (destPile.numOfCards() != 0) {
                 return destPile.getTopCard().getSuit() == card.getSuit() && destPile.getTopCard().getRank().ordinal() + 1 == card.getRank().ordinal();
             } else {
