@@ -210,7 +210,6 @@ public class Game extends Pane {
         draggedCards.clear();
     }
 
-
     private void initPiles() {
         stockPile = new Pile(Pile.PileType.STOCK, "Stock", STOCK_GAP);
         stockPile.setBlurredBackground();

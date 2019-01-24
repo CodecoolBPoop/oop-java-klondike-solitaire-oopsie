@@ -33,7 +33,7 @@ public class MouseUtil {
 
     public static void flipTopCard(Game game) {
         for (int i = 0; i < game.getTableauPiles().size(); i++) {
-            if (game.getTableauPiles().get(i).getTopCard().isFaceDown()) {
+            if (!game.getTableauPiles().get(i).isEmpty() && game.getTableauPiles().get(i).getTopCard().isFaceDown()) {
                 game.getTableauPiles().get(i).getTopCard().flip();
             }
         }
