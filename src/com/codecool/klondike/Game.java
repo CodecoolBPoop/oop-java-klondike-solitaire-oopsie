@@ -132,7 +132,7 @@ public class Game extends Pane {
         }
 
         System.out.println("CardsOn-F-Pile = " + allCardsInAllFoundationPiles );
-        return (allCardsInAllFoundationPiles == 52);
+        return (allCardsInAllFoundationPiles == 51);
     }
 
     public Game() {
