@@ -1,9 +1,11 @@
 package com.codecool.klondike;
 
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.event.EventHandler;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
@@ -16,6 +18,7 @@ import javafx.scene.layout.Pane;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
 
 public class Game extends Pane {
 
@@ -91,6 +94,11 @@ public class Game extends Pane {
         Card card = (Card) e.getSource();
         Pile tableauPile = getValidIntersectingPile(card, tableauPiles);
         Pile foundationPile = getValidIntersectingPile(card, foundationPiles);
+
+        if(isGameWon()){
+            showPopupWIN();
+        }
+
         if (tableauPile != null) {
             handleValidMove(card, tableauPile);
         } else if (foundationPile != null) {
@@ -106,9 +114,25 @@ public class Game extends Pane {
         return tableauPiles;
     }
 
+    private void showPopupWIN() {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Application information");
+        alert.setHeaderText("Congratulations, you won!");
+        alert.setContentText("Great job!");
+
+        Optional<ButtonType> result = alert.showAndWait();
+
+    }
+
     public boolean isGameWon() {
-        //TODO
-        return false;
+        int allCardsInAllFoundationPiles = 0;
+
+        for (Pile pile : foundationPiles) {
+            allCardsInAllFoundationPiles += pile.getCards().size();
+        }
+
+        System.out.println("CardsOn-F-Pile = " + allCardsInAllFoundationPiles );
+        return (allCardsInAllFoundationPiles == 52);
     }
 
     public Game() {
