@@ -62,15 +62,29 @@ public class Game extends Pane {
         double offsetY = e.getSceneY() - dragStartY;
 
         draggedCards.clear();
-        draggedCards.add(card);
 
-        card.getDropShadow().setRadius(20);
-        card.getDropShadow().setOffsetX(10);
-        card.getDropShadow().setOffsetY(10);
+        int cardsIndex = activePile.getCards().size();
+        for (int i = 0; i < activePile.getCards().size(); i++) {
+            if(activePile.getCards().get(i) == card){
+                cardsIndex = i;
+            }
+            if(i>=cardsIndex){
+                draggedCards.add(activePile.getCards().get(i));
+            }
+        }
 
-        card.toFront();
-        card.setTranslateX(offsetX);
-        card.setTranslateY(offsetY);
+//        draggedCards.add(card);
+
+        for (Card card1: draggedCards) {
+            card1.getDropShadow().setRadius(20);
+            card1.getDropShadow().setOffsetX(10);
+            card1.getDropShadow().setOffsetY(10);
+
+            card1.toFront();
+            card1.setTranslateX(offsetX);
+            card1.setTranslateY(offsetY);
+        }
+
     };
 
     private EventHandler<MouseEvent> onMouseReleasedHandler = e -> {
@@ -85,7 +99,8 @@ public class Game extends Pane {
             handleValidMove(card, foundationPile);
         } else {
             draggedCards.forEach(MouseUtil::slideBack);
-            draggedCards = FXCollections.observableArrayList();
+//            draggedCards = FXCollections.observableArrayList();
+            draggedCards.clear();
         }
 
     };
