@@ -97,11 +97,14 @@ public class Game extends Pane {
             handleValidMove(card, foundationPile);
         } else {
             draggedCards.forEach(MouseUtil::slideBack);
-//            draggedCards = FXCollections.observableArrayList();
             draggedCards.clear();
         }
 
     };
+
+    public List<Pile> getTableauPiles() {
+        return tableauPiles;
+    }
 
     public boolean isGameWon() {
         //TODO
@@ -149,6 +152,7 @@ public class Game extends Pane {
         }
         return false;
     }
+
     private Pile getValidIntersectingPile(Card card, List<Pile> piles) {
         Pile result = null;
         for (Pile pile : piles) {
@@ -178,7 +182,7 @@ public class Game extends Pane {
             msg = String.format("Placed %s to %s.", card, destPile.getTopCard());
         }
         System.out.println(msg);
-        MouseUtil.slideToDest(draggedCards, destPile);
+        MouseUtil.slideToDest(draggedCards, destPile, this);
         draggedCards.clear();
     }
 

@@ -31,7 +31,16 @@ public class MouseUtil {
                 });
     }
 
-    public static void slideToDest(List<Card> cardsToSlide, Pile destPile) {
+    public static void flipTopCard(Game game) {
+        for (int i = 0; i < game.getTableauPiles().size(); i++) {
+            System.out.println("isFaceDown: " + game.getTableauPiles().get(i).getTopCard().isFaceDown());
+            if (game.getTableauPiles().get(i).getTopCard().isFaceDown()) {
+                game.getTableauPiles().get(i).getTopCard().flip();
+            }
+        }
+    }
+
+    public static void slideToDest(List<Card> cardsToSlide, Pile destPile, Game game) {
         if (cardsToSlide == null)
             return;
         double destCardGap = destPile.getCardGap();
@@ -58,6 +67,7 @@ public class MouseUtil {
                         currentCard.getDropShadow().setRadius(2);
                         currentCard.getDropShadow().setOffsetX(0);
                         currentCard.getDropShadow().setOffsetY(0);
+                        flipTopCard(game);
                     });
         }
     }
